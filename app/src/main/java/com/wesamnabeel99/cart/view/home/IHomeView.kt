@@ -1,6 +1,6 @@
 package com.wesamnabeel99.cart.view.home
 
-import com.wesamnabeel99.cart.model.network.State
+import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.CategoryResponse
 import com.wesamnabeel99.cart.model.response.ProductsResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse

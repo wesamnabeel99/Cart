@@ -2,6 +2,7 @@ package com.wesamnabeel99.cart
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.wesamnabeel99.cart.utils.Constants
 
 import org.junit.Test
 import org.junit.runner.RunWith

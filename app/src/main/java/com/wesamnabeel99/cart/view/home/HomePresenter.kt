@@ -5,22 +5,22 @@ import com.wesamnabeel99.cart.view.base.BasePresenter
 class HomePresenter(view: IHomeView) : BasePresenter<IHomeView>(view) {
 
     fun getCategory() {
-        getData(
-            getFromRepository = cartRepository::getCategories,
+        cartRepository.createStreamOfStates(
+            getResponseState = cartRepository::getCategories,
             onSuccess = view::onCategorySuccess
         )
     }
 
     fun getUsers() {
-        getData(
-            getFromRepository = cartRepository::getUsers,
+        cartRepository.createStreamOfStates(
+            getResponseState = cartRepository::getUsers,
             onSuccess = view::onUserSuccess
         )
     }
 
     fun getProducts() {
-        getData(
-            getFromRepository = cartRepository::getProducts,
+        cartRepository.createStreamOfStates(
+            getResponseState = cartRepository::getProducts,
             onSuccess = view::onProductsSuccess
         )
     }

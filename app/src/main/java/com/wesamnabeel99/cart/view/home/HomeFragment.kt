@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.wesamnabeel99.cart.databinding.FragmentHomeBinding
-import com.wesamnabeel99.cart.model.network.State
+import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.CategoryResponse
 import com.wesamnabeel99.cart.model.response.ProductsResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
