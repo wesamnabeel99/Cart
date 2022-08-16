@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.wesamnabeel99.cart.databinding.FragmentCategoryBinding
-import com.wesamnabeel99.cart.databinding.FragmentHomeBinding
 import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.ProductsResponse
+import com.wesamnabeel99.cart.utils.logStates
 import com.wesamnabeel99.cart.view.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -18,32 +18,27 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategoryBinding =
         FragmentCategoryBinding::inflate
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.getProducts()
+        val id = arguments?.getInt("KEY") ?: 3 // number 3 for test
+        presenter.getProducts(id)
     }
 
 
     override fun onProductsSuccess(products: Flow<State<ProductsResponse>>) {
         lifecycleScope.launch {
-            products.collect {
-                when (it) {
-                    is State.Fail -> binding.productTextView.text = it.message
-                    State.Loading -> binding.productTextView.text = "fetching..."
-                    is State.Success -> binding.productTextView.text = it.data[0].title.toString()
-                }
+            products.collect { state ->
+                state.logStates()
             }
         }
     }
 
 
     companion object {
-
-        fun createNewInstance(data:String): CategoryFragment {
+        fun createNewInstance(data: Int): CategoryFragment {
             return CategoryFragment().apply {
-                arguments=Bundle().apply {
-                    putString("KEY",data)
+                arguments = Bundle().apply {
+                    putInt("KEY", data)
                 }
             }
 

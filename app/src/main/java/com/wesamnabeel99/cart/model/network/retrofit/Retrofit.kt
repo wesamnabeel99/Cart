@@ -13,9 +13,10 @@ import okhttp3.HttpUrl
 class Retrofit : ApiService {
     private val okHttpClient = Client()
 
-    override fun requestProducts(): State<ProductsResponse> {
+    override fun requestProducts(id: Int): State<ProductsResponse> {
         val httpUrl = HttpUrl.Builder().buildBaseUrl()
-            .addPathSegments(Constants.PRODUCTS_PATH_SEGMENT)
+            .addPathSegments(Constants.CATEGORY_PATH_SEGMENT)
+            .addPathSegments("${id}/products")
             .build()
 
         return okHttpClient.requestData(httpUrl, ProductsResponse::class.java)

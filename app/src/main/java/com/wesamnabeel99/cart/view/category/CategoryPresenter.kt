@@ -4,9 +4,10 @@ import com.wesamnabeel99.cart.view.base.BasePresenter
 
 class CategoryPresenter(private val view: ICategoryView) : BasePresenter() {
 
-    fun getProducts() {
+    fun getProducts(id: Int) {
         cartRepository.createStreamOfStates(
-            getResponseState = cartRepository::getProducts,
+            id = id,
+            responseState = cartRepository::getProducts,
             onSuccess = view::onProductsSuccess
         )
     }

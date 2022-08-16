@@ -9,9 +9,12 @@ import com.wesamnabeel99.cart.databinding.FragmentHomeBinding
 import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.CategoryResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
+import com.wesamnabeel99.cart.utils.logStates
 import com.wesamnabeel99.cart.view.base.BaseFragment
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
     private val presenter = HomePresenter(this)
@@ -21,30 +24,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IHomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.getCategory()
-        presenter.getUsers()
+        lifecycleScope.launch(Dispatchers.IO) {
+            presenter.getCategory()
+            presenter.getUsers()
+        }
+
     }
 
     override fun onCategorySuccess(categories: Flow<State<CategoryResponse>>) {
         lifecycleScope.launch {
-            categories.collect {
-                when (it) {
-                    is State.Fail -> binding.categoryTextView.text = it.message
-                    State.Loading -> binding.categoryTextView.text = "fetching..."
-                    is State.Success -> binding.categoryTextView.text = it.data[0].name.toString()
-                }
+            categories.collect { state ->
+                state.logStates()
             }
         }
     }
 
     override fun onUserSuccess(users: Flow<State<UserResponse>>) {
         lifecycleScope.launch {
-            users.collect {
-                when (it) {
-                    is State.Fail -> binding.userTextView.text = it.message
-                    State.Loading -> binding.userTextView.text = "fetching..."
-                    is State.Success -> binding.userTextView.text = it.data[0].name.toString()
-                }
+            users.collect { state ->
+                state.logStates()
             }
         }
     }

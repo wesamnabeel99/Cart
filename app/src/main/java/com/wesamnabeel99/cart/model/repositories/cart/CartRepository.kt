@@ -1,37 +1,52 @@
 package com.wesamnabeel99.cart.model.repositories.cart
 
-import android.util.Log
-import com.wesamnabeel99.cart.model.network.retrofit.ApiService
 import com.wesamnabeel99.cart.model.network.retrofit.Retrofit
 import com.wesamnabeel99.cart.model.network.state.State
-import com.wesamnabeel99.cart.model.network.state.StreamCreator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class CartRepository {
+class CartRepository : ICartRepository {
 
-    lateinit var retrofit: ApiService
-    private val streamCreator = StreamCreator()
+    private val retrofit = Retrofit()
 
-    fun getProducts() = retrofit.requestProducts()
+    override fun getProducts(id: Int) = retrofit.requestProducts(id)
 
-    fun getCategories() = retrofit.requestCategories()
+    override fun getCategories() = retrofit.requestCategories()
 
-    fun getUsers() = retrofit.requestUsers()
+    override fun getUsers() = retrofit.requestUsers()
 
     fun <T> createStreamOfStates(
-        getResponseState: () -> State<T>,
+        responseState: () -> State<T>,
         onSuccess: (data: Flow<State<T>>) -> Unit
     ) {
-        retrofit = Retrofit()
-        val flowOfStates =
-            streamCreator.createFlowOfStates(getResponseState).flowOn(Dispatchers.IO).catch {
-                Log.i("FLOW", "${it.message}")
-            }
+
+        val flowOfStates = flow {
+            emit(State.Loading)
+            emit(responseState())
+        }.flowOn(Dispatchers.IO).catch {
+            emit(State.Fail(it.message.toString()))
+        }
+
         onSuccess(flowOfStates)
     }
 
+    // function overloading because in some cases we need to pass the id to complete the request
+    fun <T> createStreamOfStates(
+        id: Int,
+        responseState: (id: Int) -> State<T>,
+        onSuccess: (data: Flow<State<T>>) -> Unit
+    ) {
 
+        val flowOfStates = flow {
+            emit(State.Loading)
+            emit(responseState(id))
+        }.flowOn(Dispatchers.IO).catch {
+            emit(State.Fail(it.message.toString()))
+        }
+
+        onSuccess(flowOfStates)
+    }
 }
