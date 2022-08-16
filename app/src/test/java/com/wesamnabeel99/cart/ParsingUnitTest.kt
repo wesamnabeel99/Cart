@@ -10,13 +10,13 @@ class ParsingUnitTest {
         val jsonString =
             "{\"ad\": \"if this test passed, you must drink water\",\"iseven\": true\n}"
         val jsonParser = JsonParser()
-        val parsedResponse = jsonParser.parseResponse(jsonString, isEven::class.java)
+        val parsedResponse = jsonParser.parseResponse(jsonString, IsEven::class.java)
 
-        assertEquals(isEven("if this test passed, you must drink water", true), parsedResponse)
+        assertEquals(IsEven("if this test passed, you must drink water", true), parsedResponse)
     }
 }
 
-data class isEven(
+data class IsEven(
     val ad: String?,
     val iseven: Boolean?,
 )

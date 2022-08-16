@@ -8,16 +8,16 @@ class UrlUnitTest {
 
     @Test
     fun scheme_isCorrect() {
-        assertEquals(Constants.SCHEME,"https")
+        assertEquals("https", Constants.SCHEME)
     }
 
     @Test
     fun host_isCorrect() {
-        assertEquals(Constants.HOST, "api.escuelajs.co")
+        assertEquals("api.escuelajs.co", Constants.HOST)
     }
 
     @Test
     fun segment_isCorrect() {
-        assertEquals(Constants.API_PATH_SEGMENT,"api/v1/")
+        assertEquals("api/v1/", Constants.API_PATH_SEGMENT)
     }
 }

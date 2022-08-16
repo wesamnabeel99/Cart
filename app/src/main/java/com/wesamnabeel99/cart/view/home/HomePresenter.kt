@@ -18,12 +18,4 @@ class HomePresenter(private val view: IHomeView) : BasePresenter() {
         )
     }
 
-    fun getProducts() {
-        cartRepository.createStreamOfStates(
-            getResponseState = cartRepository::getProducts,
-            onSuccess = view::onProductsSuccess
-        )
-    }
-
-
 }
