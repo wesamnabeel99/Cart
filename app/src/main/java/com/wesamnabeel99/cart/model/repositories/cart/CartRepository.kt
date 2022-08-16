@@ -19,13 +19,13 @@ class CartRepository : ICartRepository {
     override fun getUsers() = retrofit.requestUsers()
 
     fun <T> createStreamOfStates(
-        responseState: () -> State<T>,
+        getResponseState: () -> State<T>,
         onSuccess: (data: Flow<State<T>>) -> Unit
     ) {
 
         val flowOfStates = flow {
             emit(State.Loading)
-            emit(responseState())
+            emit(getResponseState())
         }.flowOn(Dispatchers.IO).catch {
             emit(State.Fail(it.message.toString()))
         }
@@ -36,13 +36,13 @@ class CartRepository : ICartRepository {
     // function overloading because in some cases we need to pass the id to complete the request
     fun <T> createStreamOfStates(
         id: Int,
-        responseState: (id: Int) -> State<T>,
+        getResponseState: (id: Int) -> State<T>,
         onSuccess: (data: Flow<State<T>>) -> Unit
     ) {
 
         val flowOfStates = flow {
             emit(State.Loading)
-            emit(responseState(id))
+            emit(getResponseState(id))
         }.flowOn(Dispatchers.IO).catch {
             emit(State.Fail(it.message.toString()))
         }

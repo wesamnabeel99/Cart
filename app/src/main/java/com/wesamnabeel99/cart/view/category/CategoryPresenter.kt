@@ -4,13 +4,18 @@ import com.wesamnabeel99.cart.view.base.BasePresenter
 
 class CategoryPresenter(private val view: ICategoryView) : BasePresenter() {
 
-    fun getProducts(id: Int) {
+    fun getCategory() {
         cartRepository.createStreamOfStates(
-            id = id,
-            responseState = cartRepository::getProducts,
-            onSuccess = view::onProductsSuccess
+            getResponseState = cartRepository::getCategories,
+            onSuccess = view::onCategorySuccess
         )
     }
 
+    fun getUsers() {
+        cartRepository.createStreamOfStates(
+            getResponseState = cartRepository::getUsers,
+            onSuccess = view::onUserSuccess
+        )
+    }
 
 }

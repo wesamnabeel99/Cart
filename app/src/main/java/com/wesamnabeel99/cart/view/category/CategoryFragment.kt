@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.wesamnabeel99.cart.databinding.FragmentCategoryBinding
 import com.wesamnabeel99.cart.model.network.state.State
-import com.wesamnabeel99.cart.model.response.ProductsResponse
+import com.wesamnabeel99.cart.model.response.CategoryResponse
+import com.wesamnabeel99.cart.model.response.users.UserResponse
 import com.wesamnabeel99.cart.utils.logStates
 import com.wesamnabeel99.cart.view.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
@@ -18,30 +19,30 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategoryBinding =
         FragmentCategoryBinding::inflate
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val id = arguments?.getInt("KEY") ?: 3 // number 3 for test
-        presenter.getProducts(id)
+        presenter.getCategory()
+        presenter.getUsers()
     }
 
-
-    override fun onProductsSuccess(products: Flow<State<ProductsResponse>>) {
+    override fun onCategorySuccess(categories: Flow<State<CategoryResponse>>) {
         lifecycleScope.launch {
-            products.collect { state ->
+            categories.collect { state ->
                 state.logStates()
+                if (state is State.Success) {
+                    val adapter = CategoryAdapter(state.data)
+                    binding.recyclerView.adapter = adapter
+                }
             }
         }
     }
 
-
-    companion object {
-        fun createNewInstance(data: Int): CategoryFragment {
-            return CategoryFragment().apply {
-                arguments = Bundle().apply {
-                    putInt("KEY", data)
-                }
+    override fun onUserSuccess(users: Flow<State<UserResponse>>) {
+        lifecycleScope.launch {
+            users.collect { state ->
+                state.logStates()
             }
-
         }
     }
 
