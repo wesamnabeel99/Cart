@@ -11,10 +11,12 @@ import com.wesamnabeel99.cart.model.response.CategoryResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
 import com.wesamnabeel99.cart.utils.logStates
 import com.wesamnabeel99.cart.view.base.BaseFragment
+import com.wesamnabeel99.cart.view.products.ProductsAdapter
+import com.wesamnabeel99.cart.view.products.ProductsFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView {
+class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView ,CategoryInteractionListener{
     private val presenter = CategoryPresenter(this)
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategoryBinding =
         FragmentCategoryBinding::inflate
@@ -45,6 +47,11 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView 
             }
         }
     }
+
+    override fun onCategoryClick(categoryId: Int) {
+        ProductsFragment.createNewInstance(categoryId)
+    }
+
 
 
 }

@@ -14,7 +14,7 @@ import com.wesamnabeel99.cart.view.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class ProductsFragment : BaseFragment<FragmentProductsBinding>(), IProductsView {
+class ProductsFragment : BaseFragment<FragmentProductsBinding>(), IProductsView ,ProductInteractionListener{
     private val presenter = ProductsPresenter(this)
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductsBinding =
         FragmentProductsBinding::inflate
@@ -30,6 +30,10 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>(), IProductsView 
         lifecycleScope.launch {
             products.collect { state ->
                 state.logStates()
+                if (state is State.Success) {
+                    val adapter = ProductsAdapter(state.data)
+                    binding.recyclerView.adapter = adapter
+                }
             }
         }
     }
@@ -44,6 +48,10 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>(), IProductsView 
             }
 
         }
+    }
+
+    override fun onProductClick() {
+        TODO("do something here")
     }
 
 
