@@ -26,7 +26,6 @@ class ProductsAdapter(
 
         holder.binding.apply {
             productName.text = currentProduct.title
-            productDescription.text = currentProduct.description
             productImage.loadImageUrl(currentProduct.images!![0])
 
             root.setOnClickListener {

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.wesamnabeel99.cart.databinding.FragmentProductDetailsBinding
 import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.product.Product
+import com.wesamnabeel99.cart.utils.loadImageUrl
 import com.wesamnabeel99.cart.utils.logStates
 import com.wesamnabeel99.cart.view.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
@@ -34,6 +35,14 @@ class ProductDetailsFragment :
         lifecycleScope.launch {
             product.collect { state ->
                 state.logStates()
+                if (state is State.Success) {
+                    binding.apply {
+                        productName.text = state.data.title
+                        productDescription.text = state.data.description
+                        productImage.loadImageUrl(state.data.images?.get(0) ?: "")
+                        productPrice.text = state.data.price.toString() + " USD"
+                    }
+                }
             }
         }
     }
