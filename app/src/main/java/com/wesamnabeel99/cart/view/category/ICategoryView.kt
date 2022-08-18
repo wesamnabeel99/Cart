@@ -7,5 +7,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface ICategoryView {
     fun onCategorySuccess(categories: Flow<State<CategoryResponse>>)
-    fun onUserSuccess(users: Flow<State<UserResponse>>)
 }

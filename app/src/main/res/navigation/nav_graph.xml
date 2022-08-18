@@ -36,5 +36,13 @@
             android:name="productId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.wesamnabeel99.cart.view.cart.CartFragment"
+        android:label="CartFragment" />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.wesamnabeel99.cart.view.user.UserFragment"
+        android:label="UserFragment" />
 
 </navigation>

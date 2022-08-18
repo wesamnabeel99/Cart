@@ -9,6 +9,5 @@ object Constants {
     const val CATEGORY_PATH_SEGMENT = "categories"
     const val USERS_PATH_SEGMENT = "users"
 
-    const val CATEGORY_KEY = "CATEGORY_KEY"
-    const val PRODUCT_KEY = "PRODUCT_KEY"
+    const val CURRENT_USER = 2
 }

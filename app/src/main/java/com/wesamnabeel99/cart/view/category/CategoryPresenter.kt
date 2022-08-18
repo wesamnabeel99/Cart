@@ -11,11 +11,5 @@ class CategoryPresenter(private val view: ICategoryView) : BasePresenter() {
         )
     }
 
-    fun getUsers() {
-        cartRepository.createStreamOfStates(
-            getResponseState = cartRepository::getUsers,
-            onSuccess = view::onUserSuccess
-        )
-    }
 
 }

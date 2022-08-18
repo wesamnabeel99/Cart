@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wesamnabeel99.cart.R
 import com.wesamnabeel99.cart.databinding.ItemProductBinding
 import com.wesamnabeel99.cart.model.response.product.Product
-import com.wesamnabeel99.cart.utils.loadImageUrl
+import com.wesamnabeel99.cart.utils.extensions.loadImageUrl
 
 class ProductsAdapter(
     private var products: List<Product>,

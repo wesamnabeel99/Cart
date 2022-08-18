@@ -7,7 +7,7 @@ import com.wesamnabeel99.cart.model.response.product.Product
 import com.wesamnabeel99.cart.model.response.product.ProductsResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
 import com.wesamnabeel99.cart.utils.Constants
-import com.wesamnabeel99.cart.utils.buildBaseUrl
+import com.wesamnabeel99.cart.utils.extensions.buildBaseUrl
 import okhttp3.HttpUrl
 
 
