@@ -14,9 +14,10 @@ import com.wesamnabeel99.cart.view.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class ProductsFragment : BaseFragment<FragmentProductsBinding>(), IProductsView,
+class ProductsFragment : BaseFragment<FragmentProductsBinding, ProductsPresenter>(), IProductsView,
     ProductInteractionListener {
-    private val presenter = ProductsPresenter(this)
+    override val presenterType = ProductsPresenter(this)
+
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductsBinding =
         FragmentProductsBinding::inflate
     private val listener = this

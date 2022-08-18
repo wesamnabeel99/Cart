@@ -7,9 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VB : ViewBinding> : Fragment() {
-    lateinit var binding: VB
+abstract class BaseFragment<VB : ViewBinding, P : BasePresenter> : Fragment() {
+    private lateinit var _binding: ViewBinding
+    protected val binding: VB
+        get() = _binding as VB
 
+    private lateinit var _presenter: BasePresenter
+    protected val presenter: P
+        get() = _presenter as P
+
+    abstract val presenterType: BasePresenter
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
 
     override fun onCreateView(
@@ -17,7 +24,8 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = bindingInflater(layoutInflater, container, false)
+        _binding = bindingInflater(layoutInflater, container, false)
+        _presenter = presenterType
         return binding.root
     }
 

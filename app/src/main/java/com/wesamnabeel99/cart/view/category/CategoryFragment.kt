@@ -12,12 +12,14 @@ import com.wesamnabeel99.cart.model.response.category.CategoryResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
 import com.wesamnabeel99.cart.utils.logStates
 import com.wesamnabeel99.cart.view.base.BaseFragment
+import com.wesamnabeel99.cart.view.products.ProductsPresenter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView,
+class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter>(), ICategoryView,
     CategoryInteractionListener {
-    private val presenter = CategoryPresenter(this)
+    override val presenterType = CategoryPresenter(this)
+
     private val listener = this
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategoryBinding =
