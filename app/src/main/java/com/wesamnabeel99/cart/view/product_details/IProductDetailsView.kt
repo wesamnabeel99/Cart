@@ -6,5 +6,5 @@ import com.wesamnabeel99.cart.model.response.product.ProductsResponse
 import kotlinx.coroutines.flow.Flow
 
 interface IProductDetailsView {
-    fun onProductSuccess(product: Flow<State<Product>>)
+    fun onProductsDetailsSuccess(product: Flow<State<Product>>)
 }

@@ -7,7 +7,7 @@ class ProductsPresenter(private val view: IProductsView) : BasePresenter() {
     fun getProducts(categoryId: Int) {
         cartRepository.createStreamOfStates(
             id = categoryId,
-            getResponseState = cartRepository::getProducts,
+            getResponseState = cartRepository::getProductsOfCategory,
             onSuccess = view::onProductsSuccess
         )
     }

@@ -7,8 +7,8 @@ import com.wesamnabeel99.cart.model.response.product.ProductsResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
 
 interface ApiService {
-    fun requestProducts(id: Int): State<ProductsResponse>
-    fun requestProduct(productId: Int) : State<Product>
+    fun requestProductsOfCategory(categoryId: Int): State<ProductsResponse>
+    fun requestProductDetails(productId: Int): State<Product>
     fun requestCategories(): State<CategoryResponse>
     fun requestUsers(): State<UserResponse>
 }

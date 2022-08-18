@@ -23,7 +23,7 @@ fun View.navigateToFragment(action: NavDirections) {
 fun ImageView.loadImageUrl(url: String) {
     Glide.with(this.context)
         .load(url)
-        .placeholder(R.drawable.ic_baseline_cloud_download_24)
+        .placeholder(R.drawable.ic_baseline_shopping_cart_24)
         .error(R.drawable.ic_baseline_error_24)
         .into(this)
 }

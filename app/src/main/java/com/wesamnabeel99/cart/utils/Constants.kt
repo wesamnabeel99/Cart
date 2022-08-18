@@ -9,5 +9,5 @@ object Constants {
     const val CATEGORY_PATH_SEGMENT = "categories"
     const val USERS_PATH_SEGMENT = "users"
 
-    const val CURRENT_USER = 2
+    const val CURRENT_USER = 0
 }

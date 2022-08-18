@@ -8,7 +8,7 @@ class ProductDetailsPresenter(private val view: IProductDetailsView) : BasePrese
         cartRepository.createStreamOfStates(
             id = categoryId,
             getResponseState = cartRepository::getProductDetails,
-            onSuccess = view::onProductSuccess
+            onSuccess = view::onProductsDetailsSuccess
         )
     }
 

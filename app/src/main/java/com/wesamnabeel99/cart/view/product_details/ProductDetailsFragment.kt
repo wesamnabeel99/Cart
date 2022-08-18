@@ -34,7 +34,7 @@ class ProductDetailsFragment :
     }
 
 
-    override fun onProductSuccess(product: Flow<State<Product>>) {
+    override fun onProductsDetailsSuccess(product: Flow<State<Product>>) {
         lifecycleScope.launch {
             product.collect { state ->
                 state.logStates()

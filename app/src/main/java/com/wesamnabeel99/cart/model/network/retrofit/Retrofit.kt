@@ -14,16 +14,16 @@ import okhttp3.HttpUrl
 class Retrofit : ApiService {
     private val okHttpClient = Client()
 
-    override fun requestProducts(id: Int): State<ProductsResponse> {
+    override fun requestProductsOfCategory(categoryId: Int): State<ProductsResponse> {
         val httpUrl = HttpUrl.Builder().buildBaseUrl()
             .addPathSegment(Constants.CATEGORY_PATH_SEGMENT)
-            .addPathSegments("${id}/products")
+            .addPathSegments("${categoryId}/products")
             .build()
 
         return okHttpClient.requestData(httpUrl, ProductsResponse::class.java)
     }
 
-    override fun requestProduct(productId: Int): State<Product> {
+    override fun requestProductDetails(productId: Int): State<Product> {
         val httpUrl = HttpUrl.Builder().buildBaseUrl()
             .addPathSegment(Constants.PRODUCTS_PATH_SEGMENT)
             .addPathSegments("$productId")
