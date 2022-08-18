@@ -10,13 +10,13 @@ import com.wesamnabeel99.cart.model.network.state.State
 import okhttp3.HttpUrl
 
 fun HttpUrl.Builder.buildBaseUrl() = this.scheme(Constants.SCHEME)
-    .host(Constants.HOST)
+    .host(Constants.HOST).addPathSegments(Constants.API_PATH_SEGMENT)
 
 fun <T> State<T>.logStates() {
     when (this) {
-        is State.Fail -> Log.i(this::class.java.simpleName, "failed: ${this.message}")
+        is State.Fail -> Log.i(this::class.java.simpleName, "failed: $message")
         State.Loading -> Log.i(this::class.java.simpleName, "loading...")
-        is State.Success -> Log.i(this::class.java.simpleName, "success: ${this.data}")
+        is State.Success -> Log.i(this::class.java.simpleName, "success: $data")
     }
 }
 
@@ -27,6 +27,8 @@ fun View.hide() {
 fun View.show() {
     this.visibility = View.VISIBLE
 }
+
+
 
 fun View.navigateToFragment(action: NavDirections) {
     Navigation.findNavController(this).navigate(action)

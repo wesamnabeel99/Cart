@@ -16,7 +16,7 @@ class Retrofit : ApiService {
 
     override fun requestProducts(id: Int): State<ProductsResponse> {
         val httpUrl = HttpUrl.Builder().buildBaseUrl()
-            .addPathSegments(Constants.CATEGORY_PATH_SEGMENT)
+            .addPathSegment(Constants.CATEGORY_PATH_SEGMENT)
             .addPathSegments("${id}/products")
             .build()
 
@@ -25,7 +25,7 @@ class Retrofit : ApiService {
 
     override fun requestProduct(productId: Int): State<Product> {
         val httpUrl = HttpUrl.Builder().buildBaseUrl()
-            .addPathSegments(Constants.PRODUCTS_PATH_SEGMENT)
+            .addPathSegment(Constants.PRODUCTS_PATH_SEGMENT)
             .addPathSegments("$productId")
             .build()
 
@@ -34,7 +34,7 @@ class Retrofit : ApiService {
 
     override fun requestCategories(): State<CategoryResponse> {
         val httpUrl = HttpUrl.Builder().buildBaseUrl()
-            .addPathSegments(Constants.CATEGORY_PATH_SEGMENT)
+            .addPathSegment(Constants.CATEGORY_PATH_SEGMENT)
             .build()
 
         return okHttpClient.requestData(httpUrl, CategoryResponse::class.java)

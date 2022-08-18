@@ -9,8 +9,10 @@ import com.wesamnabeel99.cart.databinding.FragmentCategoryBinding
 import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.category.CategoryResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
+import com.wesamnabeel99.cart.utils.hide
 import com.wesamnabeel99.cart.utils.logStates
 import com.wesamnabeel99.cart.utils.navigateToFragment
+import com.wesamnabeel99.cart.utils.show
 import com.wesamnabeel99.cart.view.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -24,7 +26,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter
     private val listener = this
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.getCategory()
@@ -35,12 +36,26 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter
         lifecycleScope.launch {
             categories.collect { state ->
                 state.logStates()
-                if (state is State.Success) {
-                    val adapter = CategoryAdapter(state.data, listener)
-                    binding.recyclerView.adapter = adapter
+                when (state) {
+                    is State.Fail -> showCategoryFailState()
+                    State.Loading -> showCategoryLoadingState()
+                    is State.Success -> showCategorySuccessState(state.data)
                 }
             }
         }
+    }
+
+    private fun showCategoryLoadingState() {
+
+    }
+
+    private fun showCategorySuccessState(data: CategoryResponse) {
+        val adapter = CategoryAdapter(data, listener)
+        binding.recyclerView.adapter = adapter
+    }
+
+    private fun showCategoryFailState() {
+
     }
 
     override fun onUserSuccess(users: Flow<State<UserResponse>>) {
@@ -52,11 +67,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter
     }
 
     override fun onCategoryClick(categoryId: Int) {
-        binding.root.navigateToFragment(
-            CategoryFragmentDirections.actionCategoryFragmentToProductsFragment(
-                categoryId
-            )
-        )
+        val action = CategoryFragmentDirections.actionCategoryFragmentToProductsFragment(categoryId)
+        binding.root.navigateToFragment(action)
     }
 
 

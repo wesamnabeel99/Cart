@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--padding dimens-->
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_medium">24dp</dimen>
+    <dimen name="padding_large">32dp</dimen>
+    <dimen name="padding_huge">40dp</dimen>
+
+    <!--margin dimens-->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_medium">24dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_huge">40dp</dimen>
+    <dimen name="extra_margin_size">80dp</dimen>
+
+    <!--text sizes-->
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="normal_text_size">14sp</dimen>
+    <dimen name="medium_text_size">16sp</dimen>
+    <dimen name="large_text_size">20sp</dimen>
+    <dimen name="very_huge_text_size">64sp</dimen>
+
+    <!--icon size-->
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="error_text_size">24sp</dimen>
+</resources>

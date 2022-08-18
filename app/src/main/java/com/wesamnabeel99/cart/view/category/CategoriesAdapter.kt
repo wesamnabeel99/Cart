@@ -26,8 +26,8 @@ class CategoryAdapter(
         val currentCategory = categories[position]
 
         holder.binding.apply {
-            categoryName.text = currentCategory.name
             categoryImage.loadImageUrl(currentCategory.image.toString())
+            categoryName.text = currentCategory.name
             root.setOnClickListener {
                 listener.onCategoryClick(currentCategory.id!!.toInt())
             }

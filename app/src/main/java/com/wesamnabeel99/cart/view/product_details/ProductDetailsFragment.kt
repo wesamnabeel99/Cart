@@ -1,7 +1,6 @@
 package com.wesamnabeel99.cart.view.product_details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,8 @@ import com.wesamnabeel99.cart.view.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, ProductDetailsPresenter>(),
+class ProductDetailsFragment :
+    BaseFragment<FragmentProductDetailsBinding, ProductDetailsPresenter>(),
     IProductDetailsView {
     override val presenterType = ProductDetailsPresenter(this)
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductDetailsBinding =
@@ -26,7 +26,6 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, Produ
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i("DETAILS",arguments.productId.toString())
         presenter.getProductDetails(arguments.productId)
     }
 
