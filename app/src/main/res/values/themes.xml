@@ -9,10 +9,11 @@
         <item name="colorSecondaryVariant">@color/light_gradient_center_color</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/light_gradient_center_color</item>
+        <item name="android:statusBarColor" tools:targetApi="l">#1B1B1B</item>
         <!-- Customize your theme here. -->
 
     </style>
+
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
         <item name="cornerSize">50%</item>
     </style>

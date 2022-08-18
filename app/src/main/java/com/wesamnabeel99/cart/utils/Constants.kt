@@ -10,4 +10,5 @@ object Constants {
     const val USERS_PATH_SEGMENT = "users"
 
     const val CURRENT_USER = 0
+    const val FIRST_IMAGE = 0
 }

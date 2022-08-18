@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wesamnabeel99.cart.R
 import com.wesamnabeel99.cart.databinding.ItemProductBinding
 import com.wesamnabeel99.cart.model.response.product.Product
+import com.wesamnabeel99.cart.utils.Constants
 import com.wesamnabeel99.cart.utils.extensions.loadImageUrl
 
 class ProductsAdapter(
@@ -26,11 +27,12 @@ class ProductsAdapter(
 
         holder.binding.apply {
             productName.text = currentProduct.title
-            productImage.loadImageUrl(currentProduct.images!![0])
+            currentProduct.images?.let {
+                productImage.loadImageUrl(it[Constants.FIRST_IMAGE])
+            }
 
             root.setOnClickListener {
-                listener.onProductClick(currentProduct.id!!.toInt())
-
+                currentProduct.id?.let { id -> listener.onProductClick(id) }
             }
         }
     }

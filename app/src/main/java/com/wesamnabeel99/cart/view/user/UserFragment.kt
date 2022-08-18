@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.wesamnabeel99.cart.databinding.FragmentUserBinding
 import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.users.UserResponse
-import com.wesamnabeel99.cart.utils.*
+import com.wesamnabeel99.cart.utils.Constants
 import com.wesamnabeel99.cart.utils.extensions.hide
 import com.wesamnabeel99.cart.utils.extensions.loadImageUrl
 import com.wesamnabeel99.cart.utils.extensions.logStates
@@ -47,7 +47,6 @@ class UserFragment :
         }
     }
 
-
     private fun showLoadingState() {
         binding.apply {
             loadingState.show()
@@ -75,5 +74,4 @@ class UserFragment :
             successState.hide()
         }
     }
-
 }

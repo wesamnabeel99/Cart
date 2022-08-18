@@ -3,7 +3,6 @@ package com.wesamnabeel99.cart.view.products
 import com.wesamnabeel99.cart.view.base.BasePresenter
 
 class ProductsPresenter(private val view: IProductsView) : BasePresenter() {
-
     fun getProducts(categoryId: Int) {
         cartRepository.createStreamOfStates(
             id = categoryId,
@@ -11,6 +10,4 @@ class ProductsPresenter(private val view: IProductsView) : BasePresenter() {
             onSuccess = view::onProductsSuccess
         )
     }
-
-
 }

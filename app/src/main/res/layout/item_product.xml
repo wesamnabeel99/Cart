@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_small"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="@dimen/card_corner_radius_small">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/productImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/productImage"
-            app:layout_constraintVertical_bias="0.375" />
+            app:layout_constraintTop_toBottomOf="@+id/productImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

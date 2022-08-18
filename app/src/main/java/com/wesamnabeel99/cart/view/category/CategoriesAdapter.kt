@@ -12,8 +12,7 @@ import com.wesamnabeel99.cart.utils.extensions.loadImageUrl
 class CategoryAdapter(
     private var categories: List<Category>,
     private val listener: CategoryInteractionListener
-) :
-    RecyclerView.Adapter<CategoryViewHolder>() {
+) : RecyclerView.Adapter<CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view =
@@ -28,7 +27,9 @@ class CategoryAdapter(
             categoryImage.loadImageUrl(currentCategory.image.toString())
             categoryName.text = currentCategory.name
             root.setOnClickListener {
-                listener.onCategoryClick(currentCategory.id!!.toInt())
+                currentCategory.id?.let { id ->
+                    listener.onCategoryClick(id)
+                }
             }
         }
     }

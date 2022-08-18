@@ -27,7 +27,6 @@ class ProductDetailsFragment :
 
     private val arguments: ProductDetailsFragmentArgs by navArgs()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.getProductDetails(arguments.productId)
@@ -50,7 +49,6 @@ class ProductDetailsFragment :
             is State.Fail -> showFailState()
         }
     }
-
 
     private fun showLoadingState() {
         binding.apply {

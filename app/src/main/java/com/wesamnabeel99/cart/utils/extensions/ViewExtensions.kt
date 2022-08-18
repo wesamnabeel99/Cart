@@ -16,14 +16,15 @@ fun View.show() {
 }
 
 
-fun View.navigateToFragment(action: NavDirections) {
-    Navigation.findNavController(this).navigate(action)
-}
-
 fun ImageView.loadImageUrl(url: String) {
     Glide.with(this.context)
         .load(url)
         .placeholder(R.drawable.ic_baseline_shopping_cart_24)
         .error(R.drawable.ic_baseline_error_24)
         .into(this)
+}
+
+
+fun View.navigateToFragment(action: NavDirections) {
+    Navigation.findNavController(this).navigate(action)
 }

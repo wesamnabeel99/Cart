@@ -51,7 +51,6 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding, ProductsPresenter
         }
     }
 
-
     private fun showLoadingState() {
         binding.apply {
             loadingState.show()

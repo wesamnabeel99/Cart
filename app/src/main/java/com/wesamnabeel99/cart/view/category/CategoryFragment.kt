@@ -30,20 +30,25 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter
         presenter.getCategory()
     }
 
+
     override fun onCategorySuccess(categories: Flow<State<CategoryResponse>>) {
         lifecycleScope.launch {
             categories.collect { state ->
                 state.logStates()
-                when (state) {
-                    is State.Fail -> showCategoryFailState()
-                    State.Loading -> showCategoryLoadingState()
-                    is State.Success -> showCategorySuccessState(state.data)
-                }
+                showResponseState(state)
             }
         }
     }
 
-    private fun showCategoryLoadingState() {
+    private fun showResponseState(state: State<CategoryResponse>) {
+        when (state) {
+            State.Loading -> showLoadingState()
+            is State.Success -> showSuccessState(state.data)
+            is State.Fail -> showFailState()
+        }
+    }
+
+    private fun showLoadingState() {
         binding.apply {
             loadingState.show()
             errorState.hide()
@@ -51,7 +56,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter
         }
     }
 
-    private fun showCategorySuccessState(data: CategoryResponse) {
+    private fun showSuccessState(data: CategoryResponse) {
         val adapter = CategoryAdapter(data, listener)
         binding.apply {
             successState.show()
@@ -61,7 +66,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter
         }
     }
 
-    private fun showCategoryFailState() {
+    private fun showFailState() {
         binding.apply {
             errorState.show()
             successState.hide()

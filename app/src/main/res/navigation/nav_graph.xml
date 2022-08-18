@@ -31,18 +31,21 @@
         android:id="@+id/productDetailsFragment"
         android:name="com.wesamnabeel99.cart.view.product_details.ProductDetailsFragment"
         android:label="ProductDetailsFragment"
-        tools:layout="@layout/fragment_product_details" >
+        tools:layout="@layout/fragment_product_details">
         <argument
             android:name="productId"
+            android:defaultValue="1"
             app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.wesamnabeel99.cart.view.cart.CartFragment"
-        android:label="CartFragment" />
+        android:label="CartFragment"
+        tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/userFragment"
         android:name="com.wesamnabeel99.cart.view.user.UserFragment"
-        android:label="UserFragment" />
+        android:label="UserFragment"
+        tools:layout="@layout/fragment_user" />
 
 </navigation>
