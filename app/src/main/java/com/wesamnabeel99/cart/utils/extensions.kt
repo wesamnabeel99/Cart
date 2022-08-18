@@ -3,6 +3,8 @@ package com.wesamnabeel99.cart.utils
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.wesamnabeel99.cart.model.network.state.State
 import okhttp3.HttpUrl
@@ -16,7 +18,6 @@ fun <T> State<T>.logStates() {
         State.Loading -> Log.i(this::class.java.simpleName, "loading...")
         is State.Success -> Log.i(this::class.java.simpleName, "success: ${this.data}")
     }
-
 }
 
 fun View.hide() {
@@ -25,6 +26,10 @@ fun View.hide() {
 
 fun View.show() {
     this.visibility = View.VISIBLE
+}
+
+fun View.navigateToFragment(action: NavDirections) {
+    Navigation.findNavController(this).navigate(action)
 }
 
 fun ImageView.loadImageUrl(url: String) {

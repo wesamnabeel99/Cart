@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="clothes" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/category_image"
         android:layout_width="250dp"
         android:layout_height="250dp"

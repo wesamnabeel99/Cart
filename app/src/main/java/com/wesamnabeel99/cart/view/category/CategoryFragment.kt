@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.wesamnabeel99.cart.databinding.FragmentCategoryBinding
 import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.category.CategoryResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
 import com.wesamnabeel99.cart.utils.logStates
+import com.wesamnabeel99.cart.utils.navigateToFragment
 import com.wesamnabeel99.cart.view.base.BaseFragment
-import com.wesamnabeel99.cart.view.products.ProductsPresenter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -53,11 +52,11 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter
     }
 
     override fun onCategoryClick(categoryId: Int) {
-        Toast.makeText(
-            binding.root.context,
-            "passed ${categoryId} to products fragment",
-            Toast.LENGTH_SHORT
-        ).show()
+        binding.root.navigateToFragment(
+            CategoryFragmentDirections.actionCategoryFragmentToProductsFragment(
+                categoryId
+            )
+        )
     }
 
 
