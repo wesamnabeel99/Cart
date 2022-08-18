@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.wesamnabeel99.cart.databinding.FragmentProductDetailsBinding
@@ -37,12 +38,25 @@ class ProductDetailsFragment :
         lifecycleScope.launch {
             product.collect { state ->
                 state.logStates()
-                when (state) {
-                    is State.Fail -> showFailState()
-                    State.Loading -> showLoadingState()
-                    is State.Success -> showSuccessState(state.data)
-                }
+                showResponseState(state)
             }
+        }
+    }
+
+    private fun showResponseState(state: State<Product>) {
+        when (state) {
+            State.Loading -> showLoadingState()
+            is State.Success -> showSuccessState(state.data)
+            is State.Fail -> showFailState()
+        }
+    }
+
+
+    private fun showLoadingState() {
+        binding.apply {
+            loadingState.show()
+            errorState.hide()
+            successState.hide()
         }
     }
 
@@ -52,17 +66,18 @@ class ProductDetailsFragment :
             errorState.hide()
             loadingState.hide()
             productName.text = product.title
-            productDescription.text =product.description
+            productDescription.text = product.description
             productImage.loadImageUrl(product.images?.get(0) ?: "")
             productPrice.text = product.price.toString() + " $"
-        }
-    }
 
-    private fun showLoadingState() {
-        binding.apply {
-            loadingState.show()
-            errorState.hide()
-            successState.hide()
+            button.setOnClickListener {
+                Toast.makeText(
+                    this@ProductDetailsFragment.context,
+                    "${product.title} added to the cart",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
     }
 

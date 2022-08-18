@@ -38,22 +38,19 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding, ProductsPresenter
         lifecycleScope.launch {
             products.collect { state ->
                 state.logStates()
-                when (state) {
-                    is State.Fail -> showFailState()
-                    State.Loading -> showLoadingState()
-                    is State.Success -> showSuccessState(state.data)
-                }
+                showResponseState(state)
             }
         }
     }
 
-    private fun showFailState() {
-        binding.apply {
-            errorState.show()
-            loadingState.hide()
-            successState.hide()
+    private fun showResponseState(state: State<ProductsResponse>) {
+        when (state) {
+            State.Loading -> showLoadingState()
+            is State.Success -> showSuccessState(state.data)
+            is State.Fail -> showFailState()
         }
     }
+
 
     private fun showLoadingState() {
         binding.apply {
@@ -71,6 +68,14 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding, ProductsPresenter
             loadingState.hide()
             val adapter = ProductsAdapter(products, listener)
             binding.recyclerView.adapter = adapter
+        }
+    }
+
+    private fun showFailState() {
+        binding.apply {
+            errorState.show()
+            loadingState.hide()
+            successState.hide()
         }
     }
 
