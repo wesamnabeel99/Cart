@@ -2,6 +2,7 @@ package com.wesamnabeel99.cart.model.repositories.cart
 
 import com.wesamnabeel99.cart.model.network.retrofit.Retrofit
 import com.wesamnabeel99.cart.model.network.state.State
+import com.wesamnabeel99.cart.model.response.product.Product
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -13,6 +14,8 @@ class CartRepository : ICartRepository {
     private val retrofit = Retrofit()
 
     override fun getProducts(id: Int) = retrofit.requestProducts(id)
+
+    override fun getProductDetails(id: Int) = retrofit.requestProduct(id)
 
     override fun getCategories() = retrofit.requestCategories()
 

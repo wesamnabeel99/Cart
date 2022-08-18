@@ -18,11 +18,11 @@ import kotlinx.coroutines.launch
 class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter>(), ICategoryView,
     CategoryInteractionListener {
     override val presenterType = CategoryPresenter(this)
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategoryBinding =
+        FragmentCategoryBinding::inflate
 
     private val listener = this
 
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategoryBinding =
-        FragmentCategoryBinding::inflate
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

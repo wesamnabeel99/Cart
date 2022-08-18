@@ -5,24 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavArgument
 import androidx.navigation.fragment.navArgs
 import com.wesamnabeel99.cart.databinding.FragmentProductsBinding
 import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.product.ProductsResponse
-import com.wesamnabeel99.cart.utils.Constants
 import com.wesamnabeel99.cart.utils.logStates
+import com.wesamnabeel99.cart.utils.navigateToFragment
 import com.wesamnabeel99.cart.view.base.BaseFragment
+import com.wesamnabeel99.cart.view.category.CategoryFragmentDirections
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class ProductsFragment : BaseFragment<FragmentProductsBinding, ProductsPresenter>(), IProductsView,
     ProductInteractionListener {
     override val presenterType = ProductsPresenter(this)
-    val arguments : ProductsFragmentArgs by navArgs()
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductsBinding =
         FragmentProductsBinding::inflate
+
+    private val arguments : ProductsFragmentArgs by navArgs()
     private val listener = this
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +47,11 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding, ProductsPresenter
 
 
     override fun onProductClick(id: Int) {
-
+        binding.root.navigateToFragment(
+            ProductsFragmentDirections.actionProductsFragmentToProductDetailsFragment(
+                id
+            )
+        )
     }
 
 
