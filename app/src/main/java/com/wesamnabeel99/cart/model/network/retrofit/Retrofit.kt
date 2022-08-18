@@ -2,8 +2,8 @@ package com.wesamnabeel99.cart.model.network.retrofit
 
 import com.wesamnabeel99.cart.model.network.client.Client
 import com.wesamnabeel99.cart.model.network.state.State
-import com.wesamnabeel99.cart.model.response.CategoryResponse
-import com.wesamnabeel99.cart.model.response.ProductsResponse
+import com.wesamnabeel99.cart.model.response.category.CategoryResponse
+import com.wesamnabeel99.cart.model.response.product.ProductsResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
 import com.wesamnabeel99.cart.utils.Constants
 import com.wesamnabeel99.cart.utils.buildBaseUrl

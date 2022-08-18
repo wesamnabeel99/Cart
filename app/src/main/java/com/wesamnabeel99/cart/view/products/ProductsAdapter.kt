@@ -3,14 +3,16 @@ package com.wesamnabeel99.cart.view.products
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.wesamnabeel99.cart.R
 import com.wesamnabeel99.cart.databinding.ItemProductBinding
-import com.wesamnabeel99.cart.model.response.Product
+import com.wesamnabeel99.cart.model.response.product.Product
 import com.wesamnabeel99.cart.utils.loadImageUrl
 
-class ProductsAdapter(private var products: List<Product>) :
+class ProductsAdapter(
+    private var products: List<Product>,
+    private val listener: ProductInteractionListener
+) :
     RecyclerView.Adapter<ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -26,12 +28,10 @@ class ProductsAdapter(private var products: List<Product>) :
             productName.text = currentProduct.title
             productDescription.text = currentProduct.description
             productImage.loadImageUrl(currentProduct.images!![0])
-            productImage.setOnClickListener {
-                Toast.makeText(
-                    holder.binding.root.context,
-                    "passed ${currentProduct.id} to product details fragment",
-                    Toast.LENGTH_LONG
-                ).show()
+
+            root.setOnClickListener {
+                listener.onProductClick(currentProduct.id!!.toInt())
+
             }
         }
     }

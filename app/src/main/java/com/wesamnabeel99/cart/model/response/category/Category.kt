@@ -1,4 +1,4 @@
-package com.wesamnabeel99.cart.model.response
+package com.wesamnabeel99.cart.model.response.category
 
 data class Category(
     val id: Int?,

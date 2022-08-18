@@ -3,14 +3,16 @@ package com.wesamnabeel99.cart.view.category
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.wesamnabeel99.cart.R
 import com.wesamnabeel99.cart.databinding.ItemCategoryBinding
-import com.wesamnabeel99.cart.model.response.Category
+import com.wesamnabeel99.cart.model.response.category.Category
 import com.wesamnabeel99.cart.utils.loadImageUrl
 
-class CategoryAdapter(private var categories: List<Category>) :
+class CategoryAdapter(
+    private var categories: List<Category>,
+    private val listener: CategoryInteractionListener
+) :
     RecyclerView.Adapter<CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -25,12 +27,8 @@ class CategoryAdapter(private var categories: List<Category>) :
         holder.binding.apply {
             categoryName.text = currentCategory.name
             categoryImage.loadImageUrl(currentCategory.image.toString())
-            categoryImage.setOnClickListener {
-                Toast.makeText(
-                    holder.binding.root.context,
-                    "passed ${currentCategory.id} to products fragment",
-                    Toast.LENGTH_LONG
-                ).show()
+            root.setOnClickListener {
+                listener.onCategoryClick(currentCategory.id!!.toInt())
             }
         }
     }

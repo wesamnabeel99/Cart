@@ -4,20 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.wesamnabeel99.cart.databinding.FragmentCategoryBinding
 import com.wesamnabeel99.cart.model.network.state.State
-import com.wesamnabeel99.cart.model.response.CategoryResponse
+import com.wesamnabeel99.cart.model.response.category.CategoryResponse
 import com.wesamnabeel99.cart.model.response.users.UserResponse
 import com.wesamnabeel99.cart.utils.logStates
 import com.wesamnabeel99.cart.view.base.BaseFragment
-import com.wesamnabeel99.cart.view.products.ProductsAdapter
-import com.wesamnabeel99.cart.view.products.ProductsFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView ,CategoryInteractionListener{
+class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView,
+    CategoryInteractionListener {
     private val presenter = CategoryPresenter(this)
+    private val listener = this
+
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategoryBinding =
         FragmentCategoryBinding::inflate
 
@@ -33,7 +35,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView 
             categories.collect { state ->
                 state.logStates()
                 if (state is State.Success) {
-                    val adapter = CategoryAdapter(state.data)
+                    val adapter = CategoryAdapter(state.data, listener)
                     binding.recyclerView.adapter = adapter
                 }
             }
@@ -49,9 +51,12 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), ICategoryView 
     }
 
     override fun onCategoryClick(categoryId: Int) {
-        ProductsFragment.createNewInstance(categoryId)
+        Toast.makeText(
+            binding.root.context,
+            "passed ${categoryId} to products fragment",
+            Toast.LENGTH_SHORT
+        ).show()
     }
-
 
 
 }

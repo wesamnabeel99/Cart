@@ -1,4 +1,6 @@
-package com.wesamnabeel99.cart.model.response
+package com.wesamnabeel99.cart.model.response.product
+
+import com.wesamnabeel99.cart.model.response.category.Category
 
 data class Product(
     val category: Category?,
