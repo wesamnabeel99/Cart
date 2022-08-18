@@ -1,17 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Cart" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowSplashscreenContent" tools:targetApi="o">
+            @drawable/splash_theme
+        </item>
         <item name="colorPrimary">@color/dark_gradient_start_color</item>
-        <item name="colorPrimaryVariant">@color/dark_gradient_center_color</item>
+        <item name="colorPrimaryVariant">@android:color/holo_red_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_gradient_start_color</item>
-        <item name="colorSecondaryVariant">@color/light_gradient_center_color</item>
+        <item name="colorSecondary">@android:color/holo_red_dark</item>
+        <item name="colorSecondaryVariant">@android:color/holo_red_light</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">#1B1B1B</item>
         <!-- Customize your theme here. -->
-
     </style>
 
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
