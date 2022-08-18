@@ -27,6 +27,7 @@ class ProductsAdapter(
 
         holder.binding.apply {
             productName.text = currentProduct.title
+            productPrice.text = currentProduct.price.toString() + "$"
             currentProduct.images?.let {
                 productImage.loadImageUrl(it[Constants.FIRST_IMAGE])
             }

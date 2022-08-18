@@ -26,15 +26,33 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_small"
-            android:layout_marginVertical="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
             android:fontFamily="sans-serif-black"
             android:text="Jeans"
             android:textColor="@color/black"
             android:textSize="@dimen/normal_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/product_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productImage"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:fontFamily="sans-serif-black"
+            android:text="10$"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/productImage" />
+            app:layout_constraintTop_toBottomOf="@+id/product_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
