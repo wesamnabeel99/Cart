@@ -9,8 +9,10 @@ import androidx.navigation.fragment.navArgs
 import com.wesamnabeel99.cart.databinding.FragmentProductDetailsBinding
 import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.product.Product
+import com.wesamnabeel99.cart.utils.hide
 import com.wesamnabeel99.cart.utils.loadImageUrl
 import com.wesamnabeel99.cart.utils.logStates
+import com.wesamnabeel99.cart.utils.show
 import com.wesamnabeel99.cart.view.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -35,15 +37,40 @@ class ProductDetailsFragment :
         lifecycleScope.launch {
             product.collect { state ->
                 state.logStates()
-                if (state is State.Success) {
-                    binding.apply {
-                        productName.text = state.data.title
-                        productDescription.text = state.data.description
-                        productImage.loadImageUrl(state.data.images?.get(0) ?: "")
-                        productPrice.text = state.data.price.toString() + " USD"
-                    }
+                when (state) {
+                    is State.Fail -> showFailState()
+                    State.Loading -> showLoadingState()
+                    is State.Success -> showSuccessState(state.data)
                 }
             }
+        }
+    }
+
+    private fun showSuccessState(product: Product) {
+        binding.apply {
+            successState.show()
+            errorState.hide()
+            loadingState.hide()
+            productName.text = product.title
+            productDescription.text =product.description
+            productImage.loadImageUrl(product.images?.get(0) ?: "")
+            productPrice.text = product.price.toString() + " $"
+        }
+    }
+
+    private fun showLoadingState() {
+        binding.apply {
+            loadingState.show()
+            errorState.hide()
+            successState.hide()
+        }
+    }
+
+    private fun showFailState() {
+        binding.apply {
+            errorState.show()
+            loadingState.hide()
+            successState.hide()
         }
     }
 

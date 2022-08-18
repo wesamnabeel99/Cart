@@ -46,16 +46,29 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryPresenter
     }
 
     private fun showCategoryLoadingState() {
-
+        binding.apply {
+            loadingState.show()
+            errorState.hide()
+            successState.hide()
+        }
     }
 
     private fun showCategorySuccessState(data: CategoryResponse) {
         val adapter = CategoryAdapter(data, listener)
-        binding.recyclerView.adapter = adapter
+        binding.apply {
+            successState.show()
+            loadingState.hide()
+            errorState.hide()
+            recyclerView.adapter = adapter
+        }
     }
 
     private fun showCategoryFailState() {
-
+        binding.apply {
+            errorState.show()
+            successState.hide()
+            loadingState.hide()
+        }
     }
 
     override fun onUserSuccess(users: Flow<State<UserResponse>>) {

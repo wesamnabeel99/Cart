@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#F1F1F1"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F1F1F1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/success_state">
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -28,23 +29,34 @@
         android:id="@+id/loading_state"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:background="@color/gray"
+        tools:visibility="gone">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:scaleY="0.5"
+            android:scaleX="0.5"
+            app:lottie_rawRes="@raw/loading_cart"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/error_state"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:background="@color/gray"
+        tools:visibility="gone">
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_foreground" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            app:lottie_rawRes="@raw/error_sad"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

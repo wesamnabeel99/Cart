@@ -9,8 +9,10 @@ import androidx.navigation.fragment.navArgs
 import com.wesamnabeel99.cart.databinding.FragmentProductsBinding
 import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.product.ProductsResponse
+import com.wesamnabeel99.cart.utils.hide
 import com.wesamnabeel99.cart.utils.logStates
 import com.wesamnabeel99.cart.utils.navigateToFragment
+import com.wesamnabeel99.cart.utils.show
 import com.wesamnabeel99.cart.view.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -36,11 +38,39 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding, ProductsPresenter
         lifecycleScope.launch {
             products.collect { state ->
                 state.logStates()
-                if (state is State.Success) {
-                    val adapter = ProductsAdapter(state.data, listener)
-                    binding.recyclerView.adapter = adapter
+                when (state) {
+                    is State.Fail -> showFailState()
+                    State.Loading -> showLoadingState()
+                    is State.Success -> showSuccessState(state.data)
                 }
             }
+        }
+    }
+
+    private fun showFailState() {
+        binding.apply {
+            errorState.show()
+            loadingState.hide()
+            successState.hide()
+        }
+    }
+
+    private fun showLoadingState() {
+        binding.apply {
+            loadingState.show()
+            errorState.hide()
+            successState.hide()
+        }
+
+    }
+
+    private fun showSuccessState(products: ProductsResponse) {
+        binding.apply {
+            successState.show()
+            errorState.hide()
+            loadingState.hide()
+            val adapter = ProductsAdapter(products, listener)
+            binding.recyclerView.adapter = adapter
         }
     }
 
