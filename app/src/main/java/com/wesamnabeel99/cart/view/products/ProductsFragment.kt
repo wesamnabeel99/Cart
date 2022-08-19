@@ -7,14 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.wesamnabeel99.cart.databinding.FragmentProductsBinding
-import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.product.ProductsResponse
 import com.wesamnabeel99.cart.utils.extensions.hide
-import com.wesamnabeel99.cart.utils.extensions.logStates
 import com.wesamnabeel99.cart.utils.extensions.navigateToFragment
 import com.wesamnabeel99.cart.utils.extensions.show
 import com.wesamnabeel99.cart.view.base.BaseFragment
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class ProductsFragment : BaseFragment<FragmentProductsBinding, ProductsPresenter>(), IProductsView,
@@ -29,48 +26,36 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding, ProductsPresenter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        presenter.getProducts(arguments.categoryId)
-    }
-
-
-    override fun onProductsSuccess(products: Flow<State<ProductsResponse>>) {
         lifecycleScope.launch {
-            products.collect { state ->
-                state.logStates()
-                showResponseState(state)
-            }
+            presenter.getProducts(arguments.categoryId)
         }
     }
 
-    private fun showResponseState(state: State<ProductsResponse>) {
-        when (state) {
-            State.Loading -> showLoadingState()
-            is State.Success -> showSuccessState(state.data)
-            is State.Fail -> showFailState()
-        }
-    }
 
-    private fun showLoadingState() {
+    override fun onLoading() {
         binding.apply {
             loadingState.show()
             errorState.hide()
             successState.hide()
         }
-
     }
 
-    private fun showSuccessState(products: ProductsResponse) {
+    override fun onSuccess(data: ProductsResponse) {
         binding.apply {
             successState.show()
             errorState.hide()
             loadingState.hide()
-            val adapter = ProductsAdapter(products, listener)
-            binding.recyclerView.adapter = adapter
+            setAdapter(data)
         }
     }
 
-    private fun showFailState() {
+    private fun setAdapter(data: ProductsResponse) {
+        val adapter = ProductsAdapter(data, listener)
+        binding.recyclerView.adapter = adapter
+    }
+
+
+    override fun onFail(message: String) {
         binding.apply {
             errorState.show()
             loadingState.hide()

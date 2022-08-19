@@ -1,10 +1,6 @@
 package com.wesamnabeel99.cart.view.category
 
-import com.wesamnabeel99.cart.model.network.state.State
 import com.wesamnabeel99.cart.model.response.category.CategoryResponse
-import com.wesamnabeel99.cart.model.response.users.UserResponse
-import kotlinx.coroutines.flow.Flow
+import com.wesamnabeel99.cart.view.base.IBaseView
 
-interface ICategoryView {
-    fun onCategorySuccess(categories: Flow<State<CategoryResponse>>)
-}
+interface ICategoryView : IBaseView<CategoryResponse>
