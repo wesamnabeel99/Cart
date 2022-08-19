@@ -8,9 +8,9 @@ import com.wesamnabeel99.cart.model.response.users.UserResponse
 
 interface ICartRepository {
 
-    fun getProductsOfCategory(id: Int): State<ProductsResponse>
+    fun getProductsOfCategory(categoryId: Int): State<ProductsResponse>
 
-    fun getProductDetails(id: Int): State<Product>
+    fun getProductDetails(productId: Int): State<Product>
 
     fun getCategories(): State<CategoryResponse>
 

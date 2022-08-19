@@ -29,4 +29,5 @@ abstract class BaseFragment<VB : ViewBinding, P : BasePresenter> : Fragment() {
         return binding.root
     }
 
+
 }

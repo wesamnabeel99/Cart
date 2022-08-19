@@ -29,28 +29,13 @@ class ProductDetailsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.getProductDetails(arguments.productId)
-    }
-
-
-    override fun onProductsDetailsSuccess(product: Flow<State<Product>>) {
         lifecycleScope.launch {
-            product.collect { state ->
-                state.logStates()
-                showResponseState(state)
-            }
+            presenter.getProductDetails(arguments.productId)
         }
     }
 
-    private fun showResponseState(state: State<Product>) {
-        when (state) {
-            State.Loading -> showLoadingState()
-            is State.Success -> showSuccessState(state.data)
-            is State.Fail -> showFailState()
-        }
-    }
 
-    private fun showLoadingState() {
+    override fun onLoading() {
         binding.apply {
             loadingState.show()
             errorState.hide()
@@ -58,7 +43,7 @@ class ProductDetailsFragment :
         }
     }
 
-    private fun showSuccessState(product: Product) {
+    override fun onSuccess(product: Product) {
         binding.apply {
             successState.show()
             errorState.hide()
@@ -79,7 +64,7 @@ class ProductDetailsFragment :
         }
     }
 
-    private fun showFailState() {
+    override fun onFail(message: String) {
         binding.apply {
             errorState.show()
             loadingState.hide()
